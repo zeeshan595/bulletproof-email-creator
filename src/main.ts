@@ -12,6 +12,11 @@ import Button from "./core/button";
 import Hyperlink from "./core/hyperlink";
 import Shadow from "./core/shadow";
 
+
+// another change
+
+// somewhere else
+
 //Defaults
 import DefaultFooter, { DefaultFooterSettings } from "./templates/footer";
 import { DefaultHeaderAccountInfo } from "./templates/header";
