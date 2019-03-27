@@ -1,0 +1,29 @@
+{
+  "name": "email-creator",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.iberdrola.eu-fr.bluemix.net/zabid-scottishpower-com/email-builder"
+  },
+  "description": "A tool to help create emails that will work on most if not all email clients",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
+    "clean": "rm -rf build"
+  },
+  "author": "Zeeshan Abid",
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-run": "^1.7.1",
+    "gulp-typescript": "^5.0.0",
+    "html-minifier": "^3.5.21",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4"
+  }
+}

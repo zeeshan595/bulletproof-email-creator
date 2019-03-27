@@ -1,0 +1,11 @@
+{
+  "exclude": ["node_modules", "build"],
+  "include": ["src"],
+  "compilerOptions": {
+    "target": "es6",
+    "noImplicitAny": false,
+    "outDir": "build",
+    "rootDir": "src",
+    "sourceMap": false
+  }
+}
