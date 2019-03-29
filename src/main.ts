@@ -1,5 +1,3 @@
-import apology from "./email-templates/adhoc/boiler-care-apology";
+import doc from "./email-templates/maturities/rmr-test";
 
-export default () => {
-    apology.saveDocument("index.html");
-};
+doc.saveDocument("index.html");
