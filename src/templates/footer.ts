@@ -21,7 +21,7 @@ class DefaultFooter extends Container {
       ),
       VerticalSpace.Table(),
       Text.P(
-        "Data for this mailing was generated and correct on <data_supply_date_full> to communicate relevant tariff information to ScottishPower customers. If you have recently moved to a new ScottishPower tariff or different supplier, please disregard this email."
+        "Data for this mailing was generated and correct on {_dataSupplyDate} to communicate relevant tariff information to ScottishPower customers. If you have recently moved to a new ScottishPower tariff or different supplier, please disregard this email."
       ),
       VerticalSpace.Table(),
       new Text({
