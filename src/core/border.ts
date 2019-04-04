@@ -48,16 +48,16 @@ export default class Border {
 
   static All = (info: BorderInfo) => {
     return new Border({
-      Top: info,
-      Bottom: info,
-      Left: info,
-      Right: info
+      Top: new BorderInfo(info),
+      Bottom: new BorderInfo(info),
+      Left: new BorderInfo(info),
+      Right: new BorderInfo(info)
     } as Border);
   };
 
   static Top = (info: BorderInfo) => {
     return new Border({
-      Top: info,
+      Top: new BorderInfo(info),
       Bottom: BorderInfo.None,
       Left: BorderInfo.None,
       Right: BorderInfo.None
@@ -66,7 +66,7 @@ export default class Border {
 
   static Bottom = (info: BorderInfo) => {
     return new Border({
-      Bottom: info,
+      Bottom: new BorderInfo(info),
       Top: BorderInfo.None,
       Left: BorderInfo.None,
       Right: BorderInfo.None
@@ -75,7 +75,7 @@ export default class Border {
 
   static Left = (info: BorderInfo) => {
     return new Border({
-      Left: info,
+      Left: new BorderInfo(info),
       Bottom: BorderInfo.None,
       Top: BorderInfo.None,
       Right: BorderInfo.None
@@ -84,7 +84,7 @@ export default class Border {
 
   static Right = (info: BorderInfo) => {
     return new Border({
-      Right: info,
+      Right: new BorderInfo(info),
       Bottom: BorderInfo.None,
       Left: BorderInfo.None,
       Top: BorderInfo.None
