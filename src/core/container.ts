@@ -66,7 +66,15 @@ export default class Container extends Template {
         }
       } as TemplateProperties)
     );
+    this._properties.push(
+      new TemplateProperties({
+        name: "BorderAdvanced",
+        func: () => {
+          return this.Border.getBorderCSS();
+        }
+      } as TemplateProperties)
+    )
   }
 
-  _rawHTML = '<table  align="{Align}"  border="0"  cellpadding="0"  cellspacing="0"  {BackgroundColorFullATR}  style="{TextAlignCSS} {BackgroundColorFullCSS} width: {Width}; box-shadow: {Shadow}; border: {Border}; {BorderRadius}"  {WidthAtribute}  {BackgroundColorAtribute}>  <tbody>    <tr>      <td>{Content}</td>    </tr>  </tbody></table>';
+  _rawHTML = '<table  align="{Align}"  border="0"  cellpadding="0"  cellspacing="0"  {BackgroundColorFullATR}  style="{TextAlignCSS} {BackgroundColorFullCSS} width: {Width}; box-shadow: {Shadow}; {BorderAdvanced} {BorderRadius}"  {WidthAtribute}  {BackgroundColorAtribute}>  <tbody>    <tr>      <td>{Content}</td>    </tr>  </tbody></table>';
 }

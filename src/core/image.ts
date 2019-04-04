@@ -16,7 +16,7 @@ export default class Image extends Template {
 
   toString(): string {
     if (this.Width.Type == "%" || this.Height.Type == "%") {
-      throw new Error(
+      throw Error(
         "img tag does not support percent scaling on some outlook clients!"
       );
     }

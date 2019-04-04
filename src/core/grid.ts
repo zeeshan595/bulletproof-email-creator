@@ -13,6 +13,7 @@ export default class Grid extends Template {
   CellSpacing: number = 0;
   CellPadding: number = 0;
   Cells: Cell[][] = [];
+  BackgoundColor: Color = Color.Inherit;
   HeadingBackgroundColor: Color = null;
   AlternateColor: Color = null;
   Shadow: Shadow = Shadow.None;
@@ -28,6 +29,8 @@ export default class Grid extends Template {
 
     let rtn =
       "<table " +
+      this.BackgoundColor.GetColorAttribute("bgcolor") +
+      " " +
       GetAlignAttribute("align", "horizontal", this.Align) +
       " " +
       this.Width.GetUnitAttribute("width") +
@@ -37,6 +40,8 @@ export default class Grid extends Template {
       Math.round(this.CellPadding).toString() +
       '" style="' +
       GetAlignCSS("text-align", "horizontal", this.TextAlign) +
+      " " +
+      this.BackgoundColor.GetColorCSS("background-color") +
       " " +
       this.Shadow.toShadowCSS() +
       " " +
@@ -51,20 +56,17 @@ export default class Grid extends Template {
       if (this.AlternateColor) {
         if (i == 0 && this.HeadingBackgroundColor !== null) {
           rowColour = this.HeadingBackgroundColor;
-        }
-        else if (i % 2 == 0)
-          rowColour = this.AlternateColor;
-        else
-          rowColour = Color.Inherit;
+        } else if (i % 2 == 0) rowColour = this.AlternateColor;
+        else rowColour = Color.Inherit;
       }
 
       for (let j = 0; j < this.Cells[i].length; j++) {
         rtn +=
           "<td " +
           this.Cells[i][j].getColumnSpansAttribute() +
-          ' ' +
+          " " +
           this.Cells[i][j].getWidthAttribute() +
-          ' ' +
+          " " +
           rowColour.GetColorAttribute("bgcolor") +
           ' style="' +
           this.Cells[i][j].getTextAlignCSS() +
@@ -77,7 +79,7 @@ export default class Grid extends Template {
           '">' +
           '<table border="0" cellspacing="0" cellpadding="0" width="100%" style="width: 100%;"><tr><td>' +
           this.Cells[i][j].toString() +
-          '</td></tr></table>' +
+          "</td></tr></table>" +
           "</td>";
       }
       rtn += "</tr>";
