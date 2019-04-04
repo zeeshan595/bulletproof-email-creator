@@ -27,7 +27,7 @@ export default class Border {
     }
 
     return (
-      "border-top: " +
+      "border-top: " + 
       this.Top.toString() +
       "; " +
       "border-bottom: " +
@@ -53,5 +53,41 @@ export default class Border {
       Left: info,
       Right: info
     } as Border);
+  };
+
+  static Top = (info: BorderInfo) => {
+    return new Border({
+      Top: info,
+      Bottom: BorderInfo.None,
+      Left: BorderInfo.None,
+      Right: BorderInfo.None
+    } as Border)
+  };
+
+  static Bottom = (info: BorderInfo) => {
+    return new Border({
+      Bottom: info,
+      Top: BorderInfo.None,
+      Left: BorderInfo.None,
+      Right: BorderInfo.None
+    } as Border)
+  };
+
+  static Left = (info: BorderInfo) => {
+    return new Border({
+      Left: info,
+      Bottom: BorderInfo.None,
+      Top: BorderInfo.None,
+      Right: BorderInfo.None
+    } as Border)
+  };
+
+  static Right = (info: BorderInfo) => {
+    return new Border({
+      Right: info,
+      Bottom: BorderInfo.None,
+      Left: BorderInfo.None,
+      Top: BorderInfo.None
+    } as Border)
   };
 }

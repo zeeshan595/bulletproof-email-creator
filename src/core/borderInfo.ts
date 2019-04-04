@@ -12,23 +12,19 @@ export default class BorderInfo {
     Object.assign(this, fields);
   }
 
-  toString() : string {
+  toString(): string {
     if (this.IsDisabled) return "none";
 
     if (this.Amount.Type == "%") {
       throw Error("Cannot use percentage scaling on border.");
     }
 
-    let color = this.Color.toString();
+    let color: string = this.Color.toString();
     if (this.Color.Inherit) {
       color = "";
     }
 
-    return (
-      this.Amount.toString() + " " +
-      this.Type.toString() + " " + 
-      color
-    );
+    return this.Amount.toString() + " " + this.Type.toString() + " " + color;
   }
 
   static None: BorderInfo = new BorderInfo({
