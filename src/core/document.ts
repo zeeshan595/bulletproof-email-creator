@@ -2,6 +2,7 @@ import Template from "./template";
 import Color from "./color";
 import * as fs from "fs";
 import Unit from "./unit";
+import VerticalSpace from "./verticalSpace";
 
 export default class Document extends Template {
   Title: string = "Scottish Power";
@@ -15,6 +16,14 @@ export default class Document extends Template {
   }
 
   saveDocument(file: string) {
+    for (let i = 0; i < this.Content.length; i++) {
+      const vs = this.Content[i] as VerticalSpace;
+      if (vs) {
+        if (vs.Type != "tag") {
+          throw Error("Document only supports tag vertical spaces");
+        }
+      }
+    }
     const processedDocument = this.toString().replace(
       /\<tr\>[\s]*\<td\>[\s]*\<\/td\>[\s]*\<\/tr\>/g,
       ""
@@ -25,5 +34,5 @@ export default class Document extends Template {
   _rawHTML =
     '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html  xmlns="http://www.w3.org/1999/xhtml"  xmlns:o="urn:schemas-microsoft-com:office:office"  xmlns:v="urn:schemas-microsoft-com:vml">  <head>    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />    <title>{Title}</title>    <meta content="width=device-width, initial-scale=1.0" name="viewport" />    <style type="text/css"> a{text-decoration: none;}  sup,sub{line-height: 0;}  body {font-family: Arial, Helvetica, sans-serif;margin: 0;' +
     this.FontSize.GetUnitCSS("font-size") +
-    '}    </style>  </head>  <body    style="background-color: {BackgroundColor}; font-family: Arial, Helvetica, sans-serif; margin: 0;"    bgcolor="{BackgroundColor}"  >    {EmailPreheader} <br />    <br />    {Content} <br />    <br />    {Attachments}{MessageOpen}  </body></html>';
+    '}    </style>  </head>  <body    style="background-color: {BackgroundColor}; font-family: Arial, Helvetica, sans-serif; margin: 0;"    bgcolor="{BackgroundColor}"  >    {EmailPreheader} <br />    <br /> {Content} <br />    <br />    {Attachments}{MessageOpen}  </body></html>';
 }
