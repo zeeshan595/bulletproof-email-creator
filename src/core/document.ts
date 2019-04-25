@@ -16,14 +16,6 @@ export default class Document extends Template {
   }
 
   saveDocument(file: string) {
-    for (let i = 0; i < this.Content.length; i++) {
-      const vs = this.Content[i] as VerticalSpace;
-      if (vs) {
-        if (vs.Type != "tag") {
-          throw Error("Document only supports tag vertical spaces");
-        }
-      }
-    }
     const processedDocument = this.toString().replace(
       /\<tr\>[\s]*\<td\>[\s]*\<\/td\>[\s]*\<\/tr\>/g,
       ""
