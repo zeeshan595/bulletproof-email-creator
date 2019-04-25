@@ -26,6 +26,24 @@ export const DefaultHeader = new Image({
   Width: Unit.Pixels(200)
 } as Image);
 
+export const DefaultHeaderWithDate = new Grid({
+  Width: Unit.Percent(100),
+  Cells: [
+    [
+      new Cell({
+        Content: [DefaultHeader] as Template[]
+      } as Cell),
+      new Cell({
+        TextAlign: Alignment.Right,
+        VerticalAlignment: Alignment.Middle,
+        Content: [
+          Text.P("<strong>25<sup>th</sup> April 2019</strong>")
+        ] as Template[]
+      } as Cell)
+    ] as Cell[]
+  ] as Cell[][]
+} as Grid);
+
 export const DefaultHeaderAccountInfo = new Grid({
   Width: Unit.Percent(100),
   Cells: [

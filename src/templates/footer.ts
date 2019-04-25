@@ -18,16 +18,17 @@ class DefaultFooter extends Container {
     this.Width = Unit.Pixels(600);
     this.TextAlign = Alignment.Center;
     this.Content = [
-      VerticalSpace.Table(2),
+      VerticalSpace.Table(1),
       Hyperlink.Link("https://scottishpower.co.uk", [
         new Text({
-          Content: "www.scottishpower.co.uk"
+          TextColor: Color.RGB(92, 136, 26),
+          Content: "<strong>www.scottishpower.co.uk</strong>"
         } as Text)
       ] as Template[]),
       new Grid({
         Align: Alignment.Center,
         TextAlign: Alignment.Center,
-        CellPadding: 50,
+        CellPadding: 30,
         Cells: [
           [
             new Cell({
