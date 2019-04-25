@@ -1,8 +1,9 @@
 import Template from "./template";
 import Color from "./color";
+import Text from "./text";
 
 export default class Hyperlink extends Template {
-  Content: string = "";
+  Content: Template[];
   Href: string = "";
   TextColor: Color = new Color({
     R: 92,
@@ -22,22 +23,28 @@ export default class Hyperlink extends Template {
       '" style="' +
       this.TextColor.GetColorCSS("color") +
       '">' +
-      this.Content +
+      this.Content.join("") +
       "</a>"
     );
   }
 
   static A(href: string, content: string = ""): string {
     if (content == "")
-      return (new Hyperlink({
+      return new Hyperlink({
         Href: href,
-        Content: href
-      } as Hyperlink)).toString();
+        Content: [ Text.P(href) ] as Template[]
+      } as Hyperlink).toString();
 
-    return (new Hyperlink({
+    return new Hyperlink({
       Href: href,
-      Content: content
-    } as Hyperlink)).toString();
+      Content: [ Text.P(href) ] as Template[]
+    } as Hyperlink).toString();
   }
 
+  static Link(href: string, content: Template[]): Hyperlink {
+    return new Hyperlink({
+      Href: href,
+      Content: content
+    } as Hyperlink);
+  }
 }

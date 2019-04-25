@@ -5,33 +5,74 @@ import Text from "../core/text";
 import VerticalSpace from "../core/verticalSpace";
 import Color from "../core/color";
 import Hyperlink from "../core/hyperlink";
+import Seperator from "../core/seperator";
+import Grid from "../core/grid";
+import Cell from "../core/cell";
+import Template from "../core/template";
+import Image from "../core/image";
 
 class DefaultFooter extends Container {
   constructor(options?: Container) {
     super();
     this.Align = Alignment.Center;
     this.Width = Unit.Pixels(600);
-    this.TextAlign = Alignment.Left;
+    this.TextAlign = Alignment.Center;
     this.Content = [
-      VerticalSpace.Table(),
-      Text.P(
-        "* " +
-          Hyperlink.A("", "Full tariff Terms and Conditions") +
-          " apply. Your bill/Direct Debit amount may vary depending on your energy consumption."
-      ),
-      VerticalSpace.Table(),
-      Text.P(
-        "Data for this mailing was generated and correct on {_dataSupplyDate} to communicate relevant tariff information to ScottishPower customers. If you have recently moved to a new ScottishPower tariff or different supplier, please disregard this email."
-      ),
-      VerticalSpace.Table(),
-      new Text({
-        Type: "h4",
-        TextColor: Color.HexToColor("#5C5C5C"),
-        Content: "Why was I sent this email?"
-      } as Text),
-      Text.P(
-        "As a valued energy customer, you will occasionally receive messages about the service we provide you. This is just to keep you up to date and to help you get the most from your online energy account."
-      ),
+      VerticalSpace.Table(2),
+      Hyperlink.Link("https://scottishpower.co.uk", [
+        new Text({
+          Content: "www.scottishpower.co.uk"
+        } as Text)
+      ] as Template[]),
+      new Grid({
+        Align: Alignment.Center,
+        TextAlign: Alignment.Center,
+        CellPadding: 50,
+        Cells: [
+          [
+            new Cell({
+              Content: [
+                Hyperlink.Link(
+                  "https://en-gb.facebook.com/ScottishPower/",
+                  [
+                    new Image({
+                      Height: Unit.Pixels(50),
+                      Source: "https://www.scottishpower.co.uk/content/images/icons/facebook-green-icon.png"
+                    } as Image)
+                  ] as Template[]
+                )
+              ] as Template[]
+            } as Cell),
+            new Cell({
+              Content: [
+                Hyperlink.Link(
+                  "https://twitter.com/ScottishPower",
+                  [
+                    new Image({
+                      Height: Unit.Pixels(50),
+                      Source: "https://www.scottishpower.co.uk/content/images/icons/twitter-green-icon.png"
+                    } as Image)
+                  ] as Template[]
+                )
+              ] as Template[]
+            } as Cell),
+            new Cell({
+              Content: [
+                Hyperlink.Link(
+                  "https://www.instagram.com/scottishpowerhq/?hl=en",
+                  [
+                    new Image({
+                      Height: Unit.Pixels(50),
+                      Source: "https://www.scottishpower.co.uk/content/images/icons/instagram-green-icon.png"
+                    } as Image)
+                  ] as Template[]
+                )
+              ] as Template[]
+            } as Cell)
+          ] as Cell[]
+        ] as Cell[][]
+      } as Grid),
+      new Seperator(),
       VerticalSpace.Table(),
       Text.P("ScottishPower Energy Retail Limited"),
       Text.P("Registered Office: 320 St. Vincent Street, Glasgow G2 5AD"),
