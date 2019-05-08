@@ -4,6 +4,7 @@ import Cell from "./cell";
 import Image from "./image";
 import Alignment from "./alignment";
 import Text from "./text";
+import Unit from "./unit";
 
 class List extends Grid {
   constructor(content: Cell[], gridOptions?: Grid) {
@@ -35,7 +36,10 @@ class List extends Grid {
           Content: [Text.P(content[i])] as Template[]
         } as Cell)
       );
-    return new List(cells, options);
+    return new List(cells, {
+      Width: Unit.Percent(100),
+      ...options
+    } as Grid);
   };
 }
 

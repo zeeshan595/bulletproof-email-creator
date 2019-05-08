@@ -17,6 +17,7 @@ export default class Grid extends Template {
   HeadingBackgroundColor: Color = null;
   AlternateColor: Color = null;
   Shadow: Shadow = Shadow.None;
+  FontSize: Unit = Unit.Pixels(15);
 
   constructor(fields?: Grid) {
     super();
@@ -44,6 +45,8 @@ export default class Grid extends Template {
       this.BackgoundColor.GetColorCSS("background-color") +
       " " +
       this.Shadow.toShadowCSS() +
+      " " +
+      this.FontSize.GetUnitCSS("font-size") + 
       " " +
       this.Width.GetUnitCSS("width") +
       '">';

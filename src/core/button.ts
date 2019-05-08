@@ -18,6 +18,8 @@ export default class Button extends Template {
   PaddingHorizontal: number = 40;
   Text: string = "Button";
   Shadow: Shadow = Shadow.None;
+  LineHeight: Unit = Unit.Inherit;
+  FontSize: Unit = Unit.Pixels(15);
 
   constructor(fields?: Button) {
     super();
@@ -47,9 +49,17 @@ export default class Button extends Template {
         func: () => {
           return GetAlignCSS("text-align", "horizontal", this.TextAlign);
         }
+      } as TemplateProperties),
+      new TemplateProperties({
+        name: "LineHeightC",
+        func: () => this.LineHeight.GetUnitCSS("line-height")
+      } as TemplateProperties),
+      new TemplateProperties({
+        name: "FontSizeC",
+        func: () => this.FontSize.GetUnitCSS("font-size")
       } as TemplateProperties)
     );
   }
 
-  _rawHTML = '<table align={Align} bgcolor="{BackgroundColor}" {widthAttribute} border="0"  cellpadding="0"  cellspacing="0"  style="{textAlignment}{widthCSS}background-color: {BackgroundColor}; padding: {PaddingVertical}px {PaddingHorizontal}px; box-shadow: {Shadow}; {BorderRadius}">  <tbody>    <tr>      <td>        <a href="{Hyperlink}" style="color: {TextColor}; text-decoration: none;"          ><strong>{Text}</strong>        </a>      </td>    </tr>  </tbody></table>';
+  _rawHTML = '<table align={Align} bgcolor="{BackgroundColor}" {widthAttribute} border="0"  cellpadding="0"  cellspacing="0"  style="{LineHeightC}{FontSizeC}{textAlignment}{widthCSS}background-color: {BackgroundColor}; padding: {PaddingVertical}px {PaddingHorizontal}px; box-shadow: {Shadow}; {BorderRadius}">  <tbody>    <tr>      <td>        <a href="{Hyperlink}" style="color: {TextColor}; text-decoration: none;"          >{Text}        </a>      </td>    </tr>  </tbody></table>';
 }

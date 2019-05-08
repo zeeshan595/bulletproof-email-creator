@@ -16,6 +16,7 @@ export default class Container extends Template {
   Shadow: Shadow = Shadow.None;
   Border: Border = Border.None;
   Content: Template[] = [];
+  LineHeight: Unit = Unit.Inherit;
 
   constructor(fields?: Container) {
     super();
@@ -53,9 +54,7 @@ export default class Container extends Template {
     this._properties.push(
       new TemplateProperties({
         name: "BackgroundColorFullCSS",
-        func: () => {
-          return "background-color: " + this.BackgroundColor + ";";
-        }
+        func: () => "background-color: " + this.BackgroundColor.toString() + ";"
       } as TemplateProperties)
     );
     this._properties.push(
@@ -74,7 +73,12 @@ export default class Container extends Template {
         }
       } as TemplateProperties)
     )
+    this._properties.push(new TemplateProperties({
+      name: "LineHeightC",
+      func: () => this.LineHeight.GetUnitCSS("line-height")
+    } as TemplateProperties)
+    )
   }
 
-  _rawHTML = '<table  align="{Align}"  border="0"  cellpadding="0"  cellspacing="0"  {BackgroundColorFullATR}  style="{TextAlignCSS} {BackgroundColorFullCSS} width: {Width}; box-shadow: {Shadow}; {BorderAdvanced} {BorderRadius}"  {WidthAtribute}  {BackgroundColorAtribute}>  <tbody>    <tr>      <td>{Content}</td>    </tr>  </tbody></table>';
+  _rawHTML = '<table  align="{Align}"  border="0"  cellpadding="0"  cellspacing="0"  {BackgroundColorFullATR}  style="{TextAlignCSS} {LineHeightC} {BackgroundColorFullCSS} width: {Width}; box-shadow: {Shadow}; {BorderAdvanced} {BorderRadius}"  {WidthAtribute}  {BackgroundColorAtribute}>  <tbody>    <tr>      <td>{Content}</td>    </tr>  </tbody></table>';
 }
