@@ -13,7 +13,7 @@ export default class Grid extends Template {
   CellSpacing: number = 0;
   CellPadding: number = 0;
   Cells: Cell[][] = [];
-  BackgoundColor: Color = Color.Inherit;
+  BackgroundColor: Color = Color.Inherit;
   HeadingBackgroundColor: Color = null;
   AlternateColor: Color = null;
   Shadow: Shadow = Shadow.None;
@@ -30,7 +30,7 @@ export default class Grid extends Template {
 
     let rtn =
       "<table " +
-      this.BackgoundColor.GetColorAttribute("bgcolor") +
+      this.BackgroundColor.GetColorAttribute("bgcolor") +
       " " +
       GetAlignAttribute("align", "horizontal", this.Align) +
       " " +
@@ -42,7 +42,7 @@ export default class Grid extends Template {
       '" style="' +
       GetAlignCSS("text-align", "horizontal", this.TextAlign) +
       " " +
-      this.BackgoundColor.GetColorCSS("background-color") +
+      this.BackgroundColor.GetColorCSS("background-color") +
       " " +
       this.Shadow.toShadowCSS() +
       " " +
