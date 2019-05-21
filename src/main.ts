@@ -4,7 +4,8 @@ import IShadow, * as Shadow from "./core_new/shadow";
 import IBorderRadius, * as BorderRadius from "./core_new/BorderRadius";
 import * as Unit from "./core_new/unit";
 import * as Color from "./core_new/color";
-import EAlignment from "./core_new/alignment";
+import EAlignment, * as Alignment from "./core_new/alignment";
+import IImage, * as Image from "./core_new/image";
 
 const container: IContainer = {
   ...Container.Default,
@@ -17,9 +18,11 @@ const container: IContainer = {
     Container.VerticalSpace,
     {
       ...Container.DefaultMargin,
-      BackgroundColor: Color.Black,
       Content: [
-        Container.VerticalSpace
+        {
+          ...Image.Default,
+          Width: 200
+        } as IImage,
       ]
     } as IContainer,
     Container.VerticalSpace
