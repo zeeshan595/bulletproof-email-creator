@@ -8,6 +8,7 @@ export default class Image extends Template {
   Width: Unit = Unit.Auto;
   Height: Unit = Unit.Auto;
   BorderRadius: BorderRadius = BorderRadius.None;
+  Loop: null | "infinite";
 
   constructor(fields?: Image) {
     super();
@@ -21,6 +22,11 @@ export default class Image extends Template {
       );
     }
 
+    let loop = "";
+    if (this.Loop == "infinite") {
+      loop = "loop='infinite' ";
+    }
+
     return (
       '<img src="' +
       this.Source +
@@ -29,6 +35,7 @@ export default class Image extends Template {
       '" ' +
       this.Width.GetUnitAttribute("width") +
       " " +
+      loop + " " +
       this.Height.GetUnitAttribute("height") +
       ' style="' +
       this.Width.GetUnitCSS("width") +

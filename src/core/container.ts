@@ -25,7 +25,7 @@ export default class Container extends Template {
     //HTML Attributes
     this._properties.push(
       new TemplateProperties({
-        name: "WidthAtribute",
+        name: "Widthattribute",
         func: () => {
           return this.Width.GetUnitAttribute("width");
         }
@@ -34,7 +34,7 @@ export default class Container extends Template {
 
     this._properties.push(
       new TemplateProperties({
-        name: "BackgroundColorAtribute",
+        name: "BackgroundColorattribute",
         func: () => {
           return this.BackgroundColor.GetColorAttribute("bgcolor");
         }
@@ -80,5 +80,5 @@ export default class Container extends Template {
     )
   }
 
-  _rawHTML = '<table  align="{Align}"  border="0"  cellpadding="0"  cellspacing="0"  {BackgroundColorFullATR}  style="{TextAlignCSS} {LineHeightC} {BackgroundColorFullCSS} width: {Width}; box-shadow: {Shadow}; {BorderAdvanced} {BorderRadius}"  {WidthAtribute}  {BackgroundColorAtribute}>  <tbody>    <tr>      <td>{Content}</td>    </tr>  </tbody></table>';
+  _rawHTML = '<table  align="{Align}"  border="0"  cellpadding="0"  cellspacing="0"  {BackgroundColorFullATR}  style="{TextAlignCSS} {LineHeightC} {BackgroundColorFullCSS} width: {Width}; box-shadow: {Shadow}; {BorderAdvanced} {BorderRadius}"  {Widthattribute}  {BackgroundColorattribute}>  <tbody>    <tr>      <td>{Content}</td>    </tr>  </tbody></table>';
 }
