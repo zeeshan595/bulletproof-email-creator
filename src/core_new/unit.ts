@@ -37,7 +37,7 @@ export const toString = (unit: IUnit, name: string, type: "attribute" | "style")
       case "px":
         return " " + name + ': ' + unit.Value + 'px; ';
       case "%":
-        return " " + name + '= ' + unit.Value + '%; ';
+        return " " + name + ': ' + unit.Value + '%; ';
       default:
         throw Error("Unit type not supported!");
     }
