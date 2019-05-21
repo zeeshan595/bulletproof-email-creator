@@ -53,6 +53,12 @@ export const HexToColor = (hex: string): IColor => {
   }
 }
 
+export const rgb = (r: number, g: number, b: number) => ({
+  Inherit: false,
+  R: r,
+  G: g,
+  b: b
+}) as IColor;
 export const White: IColor = {
   R: 255, 
   G: 255,

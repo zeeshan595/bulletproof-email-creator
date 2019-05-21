@@ -1,4 +1,4 @@
-enum IAlignment {
+enum EAlignment {
   //Horizontal
   Inherit = 0,
   Left = "left",
@@ -9,10 +9,10 @@ enum IAlignment {
   Middle = "middle",
   Bottom = "bottom"
 };
-export default IAlignment;
+export default EAlignment;
 
-export const toString = (align: IAlignment, name: string, type: "attribute" | "style") => {
-  if (align == IAlignment.Inherit) {
+export const toString = (align: EAlignment, name: string, type: "attribute" | "style") => {
+  if (align == EAlignment.Inherit) {
     return "";
   }
 
