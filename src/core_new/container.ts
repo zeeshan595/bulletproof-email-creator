@@ -20,20 +20,28 @@ export default interface IContainer extends ITemplate {
   Content: ITemplate[];
 };
 
+export const attributes = (data: IContainer) => (
+  Color.toString(data.BackgroundColor, "bgcolor", "attribute") +
+  Unit.toString(data.Width, "width", "attribute") +
+  Alignment.toString(data.Align, "align", "attribute")
+)
+
+export const styles = (data: IContainer) => (
+  Color.toString(data.BackgroundColor, "background-color", "style") +
+  Unit.toString(data.Width, "width", "style") +
+  Alignment.toString(data.TextAlign, "text-align", "style") +
+  Unit.toString(data.LineHeight, "line-height", "style") +
+  Shadow.toString(data.Shadow) +
+  BorderRadius.toString(data.BorderRadius)
+)
+
 export const Default: IContainer = {
   toString: (data: IContainer): string => {
     let rtn = "";
     rtn += "<table ";
-    rtn += Color.toString(data.BackgroundColor, "bgcolor", "attribute");
-    rtn += Unit.toString(data.Width, "width", "attribute");
-    rtn += Alignment.toString(data.Align, "align", "attribute");
+    rtn += attributes(data);
     rtn += 'style="'
-    rtn += Color.toString(data.BackgroundColor, "background-color", "style");
-    rtn += Unit.toString(data.Width, "width", "style");
-    rtn += Alignment.toString(data.TextAlign, "text-align", "style");
-    rtn += Unit.toString(data.LineHeight, "line-height", "style");
-    rtn += Shadow.toString(data.Shadow);
-    rtn += BorderRadius.toString(data.BorderRadius);
+    rtn += styles(data);
     rtn += '">';
     for (let i = 0; i < data.Content.length; i++) {
       rtn += "<tr>";
@@ -47,7 +55,7 @@ export const Default: IContainer = {
   },
   Align: EAlignment.Inherit,
   TextAlign: EAlignment.Inherit,
-  BackgroundColor: Color.White,
+  BackgroundColor: Color.Default,
   Width: Unit.Default,
   LineHeight: Unit.Default,
   Shadow: Shadow.Default,

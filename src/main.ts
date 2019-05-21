@@ -8,6 +8,8 @@ import EAlignment, * as Alignment from "./core_new/alignment";
 import IImage, * as Image from "./core_new/image";
 import IText, * as Text from "./core_new/text";
 import IRaw, * as Raw from "./core_new/raw";
+import IGrid, * as Grid from "./core_new/grid";
+import ICell, * as Cell from "./core_new/cell";
 
 const container: IContainer = {
   ...Container.Default,
@@ -22,20 +24,41 @@ const container: IContainer = {
       ...Container.DefaultMargin,
       Content: [
         {
-          ...Image.Default,
-          Width: 200
-        } as IImage,
+          ...Grid.Default,
+          Cells: [
+            [
+              {
+                ...Cell.Default,
+                Content: [
+                  {
+                    ...Image.Default,
+                    Width: 200
+                  } as IImage
+                ]
+              },
+              {
+                ...Cell.Default,
+                Content: [
+                 {
+                   ...Raw.Default,
+                   Content: (
+                     Text.p("Account Number: {accountNumber}")
+                   )
+                 } as IRaw
+                ]
+              }
+            ]
+          ]
+        } as IGrid,
         Container.VerticalSpace,
         {
           ...Raw.Default,
           Content: (
-            Text.p("Dear {title} {surname}") +
+            Text.p("Dear {title} {surname},") +
             Text.Space +
-            Text.p("We have recently noticed that due to a fault with our systems there has been an issue collecting the Direct Debit payments for your ScottishPower energy account. We have now resolved this issue by reinstating your Direct Debit instruction. Your new Direct Debit payment is £{ddAmount} (this is a variable – not sure on name yet)  and will begin on or around {ddDate}. (variable – again, not sure on name of it yet – will be date format)") +
+            Text.p("We have recently noticed that due to a fault with our systems there has been an issue collecting the Direct Debit payments for your ScottishPower energy account. We have now resolved this issue by reinstating your Direct Debit instruction. Your new Direct Debit payment is £{ddAmount}  and will begin on or around {ddDate}.") +
             Text.Space +
-            Text.p("If you require any further information on this matter please do not hesitate to contact us on 0800 xxx xxxx (will confirm number)") +
-            Text.Space +
-            Text.p("Will also confirm if its Lynda Clayton or Craig Paterson as the signatory – pop LC on it for now") + 
+            Text.p("If you require any further information on this matter please do not hesitate to contact us on 0800 xxx xxxx") +
             Text.Space +
             Text.p("Thanks")
           )
