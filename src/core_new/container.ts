@@ -56,6 +56,12 @@ export const Default: IContainer = {
   Content: []
 };
 
+export const DefaultMargin: IContainer = {
+  ...Default,
+  Align: EAlignment.Center,
+  Width: Unit.Percent(90)
+}
+
 export const VerticalSpace: IVerticalSpace = {
   toString: () => {
     return "&#160;";
