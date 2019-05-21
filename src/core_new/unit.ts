@@ -1,6 +1,6 @@
 export default interface IUnit {
-  Type?: "px" | "%";
-  Value?: "inherit" | "auto" | number;
+  Type: "px" | "%";
+  Value: "inherit" | "auto" | number;
 };
 
 export const Default: IUnit = {

@@ -14,18 +14,18 @@ export const Default: IShadow = {
   Disabled: true,
   OffsetX: 0,
   OffsetY: 0,
-  Blur: 0,
-  Spread: 0,
+  Blur: 10,
+  Spread: 5,
   Color: Color.rgb(220, 220, 220)
 }
 
-export const Box = (x: number, y: number, blur: number, spread: number, color: IUnit) => ({
+export const Box = (x: number, y: number, blur: number, spread: number, color: IColor) => ({
   OffsetX: x,
   OffsetY: y,
   Blur: blur,
   Spread: spread,
+  Disabled: false,
   Color: color,
-  Disabled: false
 }) as IShadow
 
 export const toString = (shadow: IShadow) => {

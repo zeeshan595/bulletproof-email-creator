@@ -1,13 +1,14 @@
+import * as fs from "fs";
 import IColor, * as Color from "./color";
 import IUnit, * as Unit from "./unit";
 import ITemplate, * as Template from "./template";
-import * as fs from "fs";
+import IVerticalSpace from "./verticalSpace";
 
 export default interface IDocument {
-  Title?: string;
-  BackgroundColor?: IColor;
-  FontSize?: IUnit;
-  Content?: ITemplate[];
+  Title: string;
+  BackgroundColor: IColor;
+  FontSize: IUnit;
+  Content: ITemplate[];
 };
 
 export const Default: IDocument = {
@@ -39,10 +40,6 @@ export const saveDocument = (doc: IDocument, file: string) => {
     ""
   );
   fs.writeFileSync("build/" + file, processedDocument, "utf-8");
-}
-
-export interface IVerticalSpace extends ITemplate {
-  toString: () => string
 }
 
 export const VerticalSpace: IVerticalSpace = {

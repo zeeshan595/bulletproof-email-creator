@@ -1,8 +1,8 @@
 export default interface IColor {
-  R?: number;
-  G?: number;
-  B?: number;
-  Inherit?: boolean;
+  R: number;
+  G: number;
+  B: number;
+  Inherit: boolean;
 };
 
 export const Default: IColor = {
@@ -43,13 +43,17 @@ export const HexToColor = (hex: string): IColor => {
     : null;
   if (!converted) {
     return {
-      Inherit: true
+      Inherit: true,
+      R: 255,
+      G: 255,
+      B: 255
     };
   }
   return {
     R: converted.r,
     G: converted.g,
-    B: converted.b
+    B: converted.b,
+    Inherit: false
   }
 }
 
@@ -57,7 +61,7 @@ export const rgb = (r: number, g: number, b: number) => ({
   Inherit: false,
   R: r,
   G: g,
-  b: b
+  B: b
 }) as IColor;
 export const White: IColor = {
   R: 255, 

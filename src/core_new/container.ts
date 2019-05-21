@@ -4,17 +4,20 @@ import IColor, * as Color from "./color";
 import IUnit, * as Unit from "./unit";
 import IShadow, * as Shadow from "./shadow";
 import IBorder, * as Border from "./border";
+import IBorderRadius, * as BorderRadius from "./BorderRadius";
+import IVerticalSpace from "./verticalSpace";
 
 export default interface IContainer extends ITemplate {
   toString: (data: IContainer) => string;
-  Align?: EAlignment;
-  TextAlign?: EAlignment;
-  BackgroundColor?: IColor;
-  Width?: IUnit;
-  LineHeight?: IUnit;
-  Shadow?: IShadow;
-  Border?: IBorder;
-  Content?: ITemplate[];
+  Align: EAlignment;
+  TextAlign: EAlignment;
+  BackgroundColor: IColor;
+  Width: IUnit;
+  LineHeight: IUnit;
+  Shadow: IShadow;
+  Border: IBorder;
+  BorderRadius: IBorderRadius;
+  Content: ITemplate[];
 };
 
 export const Default: IContainer = {
@@ -30,6 +33,7 @@ export const Default: IContainer = {
     rtn += Alignment.toString(data.TextAlign, "text-align", "style");
     rtn += Unit.toString(data.LineHeight, "line-height", "style");
     rtn += Shadow.toString(data.Shadow);
+    rtn += BorderRadius.toString(data.BorderRadius);
     rtn += '">';
     for (let i = 0; i < data.Content.length; i++) {
       rtn += "<tr>";
@@ -48,5 +52,12 @@ export const Default: IContainer = {
   LineHeight: Unit.Default,
   Shadow: Shadow.Default,
   Border: Border.Default,
+  BorderRadius: BorderRadius.Default,
   Content: []
 };
+
+export const VerticalSpace: IVerticalSpace = {
+  toString: () => {
+    return "&#160;";
+  }
+}

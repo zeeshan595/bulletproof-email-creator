@@ -2,10 +2,10 @@ import EBorderType from "./borderType";
 import IColor, * as Color from "./color";
 
 export default interface IBorderInfo {
-  Amount?: number;
-  Type?: EBorderType;
-  Color?: IColor;
-  Disabled?: boolean;
+  Amount: number;
+  Type: EBorderType;
+  Color: IColor;
+  Disabled: boolean;
 };
 
 export const Default: IBorderInfo = {
