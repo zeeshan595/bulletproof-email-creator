@@ -1,6 +1,6 @@
 {
   "name": "bulletproof-email-creator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": {
     "url": "https://github.com/zeeshan595/email-builder",
     "npm": "https://www.npmjs.com/package/bulletproof-email-creator"
@@ -11,8 +11,8 @@
     "build": "gulp build",
     "clean": "rm -rf build"
   },
-  "main": "src/main.ts",
-  "types": "src/main.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "author": "Zeeshan Abid",
   "Dependencies": {
     "@babel/core": "^7.3.4",
