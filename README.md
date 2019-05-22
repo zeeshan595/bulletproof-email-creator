@@ -18,7 +18,7 @@ import {
   Image,
   Text,
   Container
-} from "./main";
+} from "bulletproof-email-creator";
 
 //Create a container
 const container = {
