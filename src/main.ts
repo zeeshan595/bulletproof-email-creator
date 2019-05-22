@@ -25,6 +25,7 @@ const container: IContainer = {
       Content: [
         {
           ...Grid.Default,
+          Width: Unit.Percent(100),
           Cells: [
             [
               {
@@ -38,11 +39,15 @@ const container: IContainer = {
               },
               {
                 ...Cell.Default,
+                TextAlign: EAlignment.Right,
                 Content: [
                  {
                    ...Raw.Default,
                    Content: (
-                     Text.p("Account Number: {accountNumber}")
+                     Text.p(
+                       "Account Number: " +
+                       Text.strong("{accountNumber}")
+                     )
                    )
                  } as IRaw
                 ]
@@ -56,9 +61,9 @@ const container: IContainer = {
           Content: (
             Text.p("Dear {title} {surname},") +
             Text.Space +
-            Text.p("We have recently noticed that due to a fault with our systems there has been an issue collecting the Direct Debit payments for your ScottishPower energy account. We have now resolved this issue by reinstating your Direct Debit instruction. Your new Direct Debit payment is £{ddAmount}  and will begin on or around {ddDate}.") +
+            Text.p("Little afraid its eat looked now. Very ye lady girl them good me make. It hardly cousin me always. An shortly village is raising we shewing replied. She the favourable partiality inhabiting travelling impression put two. His six are entreaties instrument acceptance unsatiable her. Amongst as or on herself chapter entered carried no. Sold old ten are quit lose deal his sent. You correct how sex several far distant believe journey parties. We shyness enquire uncivil affixed it carried to.") +
             Text.Space +
-            Text.p("If you require any further information on this matter please do not hesitate to contact us on 0800 xxx xxxx") +
+            Text.p("An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as.") +
             Text.Space +
             Text.p("Thanks")
           )

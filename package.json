@@ -1,8 +1,8 @@
 {
-  "name": "email-creator",
+  "name": "bulletproof-email-creator",
   "version": "1.0.0",
   "repository": {
-    "url": "https://github.iberdrola.eu-fr.bluemix.net/zabid-scottishpower-com/email-builder"
+    "url": "https://github.com/zeeshan595/email-builder"
   },
   "description": "A tool to help create emails that will work on most if not all email clients",
   "scripts": {
@@ -12,6 +12,8 @@
   },
   "author": "Zeeshan Abid",
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "@types/node": "^10.12.18",
     "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
@@ -21,9 +23,5 @@
     "gulp-typescript": "^5.0.0",
     "html-minifier": "^3.5.21",
     "typescript": "^3.2.2"
-  },
-  "dependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4"
   }
 }
