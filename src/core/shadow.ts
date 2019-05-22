@@ -1,42 +1,39 @@
-import Color from "./color";
-import Unit from "./unit";
+import IUnit from "./unit";
+import IColor, * as Color from "./color";
 
-export default class Shadow {
-  OffsetX: Unit = Unit.Zero;
-  OffsetY: Unit = Unit.Zero;
-  Blur: Unit = Unit.Zero;
-  Spread: Unit = Unit.Zero;
-  Color: Color = Color.RGB(204, 204, 204);
-  IsDisabled: boolean = false;
+export default interface IShadow {
+  OffsetX?: number;
+  OffsetY?: number;
+  Blur?: number;
+  Spread?: number;
+  Color?: IColor;
+  Disabled?: boolean;
+};
 
-  constructor(fields?: Shadow) {
-    Object.assign(this, fields);
-  }
+export const Default: IShadow = {
+  Disabled: true,
+  OffsetX: 0,
+  OffsetY: 0,
+  Blur: 10,
+  Spread: 5,
+  Color: Color.rgb(220, 220, 220)
+}
 
-  toShadowCSS(): string {
-    return (
-      "box-shadow: " + this.toString() + "; " +
-      "-moz-box-shadow: " + this.toString() + "; " +
-      "-webkit-box-shadow: " + this.toString() + "; " 
-    );
-  }
+export const Box = (x: number, y: number, blur: number, spread: number, color: IColor) => ({
+  OffsetX: x,
+  OffsetY: y,
+  Blur: blur,
+  Spread: spread,
+  Disabled: false,
+  Color: color,
+}) as IShadow
 
-  toString(): string {
-    if (this.IsDisabled) return "none";
-    return (
-      this.OffsetX.toString() +
-      " " +
-      this.OffsetY.toString() +
-      " " +
-      this.Blur.toString() +
-      " " +
-      this.Spread.toString() +
-      " " +
-      this.Color.toString()
-    );
-  }
-
-  static None: Shadow = new Shadow({
-    IsDisabled: true
-  } as Shadow);
+export const toString = (shadow: IShadow) => {
+  if (shadow.Disabled) return "";
+  const str = shadow.OffsetX + "px " + shadow.OffsetY + "px " + shadow.Blur + "px " + shadow.Spread + "px " + Color.ColorToHex(shadow.Color);
+  return (
+    " box-shadow: " + str + "; " +
+    "-moz-box-shadow: " + str + "; " +
+    "-webkit-box-shadow: " + str + "; " 
+  );
 }

@@ -1,77 +1,204 @@
-import Template from "./template";
-import Hyperlink from "./hyperlink";
-import Alignment from "./alignment";
-import Color from "./color";
-import Unit from "./unit";
+import IColor, * as Color from "./color";
+import IUnit, * as Unit from "./unit";
+import EAlignment, * as Alignment from "./alignment";
 
-export default class Text extends Template {
-  Align: Alignment = Alignment.Inherit;
-  Type: "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" = "p";
-  TextColor: Color = new Color({
-    R: 92,
-    G: 92,
-    B: 92
-  } as Color);
-  LineHeight: Unit = Unit.Inherit;
-  FontSize: Unit = Unit.Inherit;
-  Content: string = "";
-
-  constructor(fields?: Text) {
-    super();
-    Object.assign(this, fields);
-  }
-
-  getAlignmentCSS() {
-    if (this.Align == Alignment.Inherit) {
-      return "";
-    }
-
-    return "text-align: " + this.Align.toString() + ";";
-  }
-
-  toString(): string {
-    return (
-      "<" +
-      this.Type +
-      ' style="margin: 0; padding: 0; ' +
-      this.LineHeight.GetUnitCSS("line-height") +
-      "color: " +
-      this.TextColor.toString() +
-      ";" +
-      this.getAlignmentCSS() +
-      this.FontSize.GetUnitCSS("font-size") +
-      '">' +
-      this.Content +
-      "</" +
-      this.Type +
-      ">"
-    );
-  }
-
-  static P(str: string) {
-    return new Text({ Type: "p", Content: str } as Text);
-  }
-  static H1(str: string) {
-    return new Text({
-      Type: "h1",
-      Content: str,
-      TextColor: Color.RGB(75, 120, 21),
-      Align: Alignment.Center
-    } as Text);
-  }
-  static H2(str: string) {
-    return new Text({ Type: "h2", Content: str } as Text);
-  }
-  static H3(str: string) {
-    return new Text({ Type: "h3", Content: str } as Text);
-  }
-  static H4(str: string) {
-    return new Text({ Type: "h4", Content: str } as Text);
-  }
-  static H5(str: string) {
-    return new Text({ Type: "h5", Content: str } as Text);
-  }
-  static H6(str: string) {
-    return new Text({ Type: "h6", Content: str } as Text);
-  }
+export default interface IText {
+  TextAlign?: EAlignment;
+  Color?: IColor;
+  LineHeight?: IUnit;
+  FontSize?: IUnit;
+  FontWeight?: IUnit;
+  Hyperlink?: string;
 }
+
+export const Default: IText = {
+  TextAlign: EAlignment.Inherit,
+  Color: Color.rgb(92, 92, 92),
+  LineHeight: Unit.Pixels(22),
+  FontSize: Unit.Pixels(17),
+  FontWeight: Unit.Default,
+  Hyperlink: null
+}
+
+const hyperlinkToString = (href: string) => {
+  if (href) {
+    return ' href="' + href + '" ';
+  }
+  return "";
+}
+
+const getAttrOptionsRawHTML = (options?: IText) => (
+  hyperlinkToString(options.Hyperlink)
+)
+
+const getStyleOptionsRawHTML = (options?: IText) => (
+  Alignment.toString(options.TextAlign, "text-align", "style") +
+  Color.toString(options.Color, "color", "style") +
+  Unit.toString(options.LineHeight, "line-height", "style") +
+  Unit.toString(options.FontSize, "font-size", "style") +
+  Unit.toString(options.FontWeight, "font-weight", "style")
+)
+
+export const p = (content: string, options?: IText) => (
+  "<p " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</p>"
+);
+
+export const h1 = (content: string, options?: IText) => (
+  "<h1 " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</h1>"
+);
+
+export const h2 = (content: string, options?: IText) => (
+  "<h2 " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</h2>"
+);
+
+export const h3 = (content: string, options?: IText) => (
+  "<h3 " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</h3>"
+);
+
+export const h4 = (content: string, options?: IText) => (
+  "<h4 " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</h4>"
+);
+
+export const h5 = (content: string, options?: IText) => (
+  "<h5 " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</h5>"
+);
+
+export const h6 = (content: string, options?: IText) => (
+  "<h6 " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</h6>"
+);
+
+export const strong = (content: string, options?: IText) => (
+  "<strong " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</strong>"
+);
+
+export const a = (content: string, options?: IText) => (
+  "<a " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options,
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</a>"
+);
+
+export const span = (content: string, options?: IText) => (
+  "<span " +
+  getAttrOptionsRawHTML({
+    ...Default,
+    ...options
+  }) + " " +
+  'style="' +
+  getStyleOptionsRawHTML({
+    ...Default,
+    ...options
+  }) +
+  ' margin: 0; padding: 0;" >' +
+  content +
+  "</span>"
+);
+
+export const Space = (
+  "<table><tr><td>&#160;</td></tr></table>"
+);

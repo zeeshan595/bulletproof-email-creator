@@ -1,84 +1,77 @@
-import Template from "./template";
-import Alignment from "./alignment";
-import Color from "./color";
-import Unit from "./unit";
-import Shadow from "./shadow";
-import Border from "./border";
-import TemplateProperties from "./templateProperties";
-import BorderRadius from "./borderRadius";
+import ITemplate from "./template";
+import EAlignment, * as Alignment from "./alignment";
+import IColor, * as Color from "./color";
+import IUnit, * as Unit from "./unit";
+import IShadow, * as Shadow from "./shadow";
+import IBorder, * as Border from "./border";
+import IBorderRadius, * as BorderRadius from "./BorderRadius";
+import IVerticalSpace from "./verticalSpace";
 
-export default class Container extends Template {
-  Align: Alignment = Alignment.Left;
-  TextAlign: Alignment = Alignment.Inherit;
-  BackgroundColor: Color = Color.Inherit;
-  Width: Unit = Unit.Auto;
-  BorderRadius: BorderRadius = BorderRadius.None;
-  Shadow: Shadow = Shadow.None;
-  Border: Border = Border.None;
-  Content: Template[] = [];
-  LineHeight: Unit = Unit.Inherit;
+export default interface IContainer extends ITemplate {
+  toString: (data: IContainer) => string;
+  Align: EAlignment;
+  TextAlign: EAlignment;
+  BackgroundColor: IColor;
+  Width: IUnit;
+  LineHeight: IUnit;
+  Shadow: IShadow;
+  Border: IBorder;
+  BorderRadius: IBorderRadius;
+  Content: ITemplate[];
+};
 
-  constructor(fields?: Container) {
-    super();
-    Object.assign(this, fields);
+export const attributes = (data: IContainer) => (
+  Color.toString(data.BackgroundColor, "bgcolor", "attribute") +
+  Unit.toString(data.Width, "width", "attribute") +
+  Alignment.toString(data.Align, "align", "attribute")
+)
 
-    //HTML Attributes
-    this._properties.push(
-      new TemplateProperties({
-        name: "Widthattribute",
-        func: () => {
-          return this.Width.GetUnitAttribute("width");
-        }
-      } as TemplateProperties)
-    );
+export const styles = (data: IContainer) => (
+  Color.toString(data.BackgroundColor, "background-color", "style") +
+  Unit.toString(data.Width, "width", "style") +
+  Alignment.toString(data.TextAlign, "text-align", "style") +
+  Unit.toString(data.LineHeight, "line-height", "style") +
+  Shadow.toString(data.Shadow) +
+  BorderRadius.toString(data.BorderRadius)
+)
 
-    this._properties.push(
-      new TemplateProperties({
-        name: "BackgroundColorattribute",
-        func: () => {
-          return this.BackgroundColor.GetColorAttribute("bgcolor");
-        }
-      } as TemplateProperties)
-    );
+export const Default: IContainer = {
+  toString: (data: IContainer): string => {
+    let rtn = "";
+    rtn += "<table ";
+    rtn += attributes(data);
+    rtn += 'style="'
+    rtn += styles(data);
+    rtn += '">';
+    for (let i = 0; i < data.Content.length; i++) {
+      rtn += "<tr>";
+      rtn += "<td>";
+      rtn += data.Content[i].toString(data.Content[i]);
+      rtn += "</td>"
+      rtn += "</tr>";
+    }
+    rtn += "</table>"
+    return rtn;
+  },
+  Align: EAlignment.Inherit,
+  TextAlign: EAlignment.Inherit,
+  BackgroundColor: Color.Default,
+  Width: Unit.Default,
+  LineHeight: Unit.Default,
+  Shadow: Shadow.Default,
+  Border: Border.Default,
+  BorderRadius: BorderRadius.Default,
+  Content: []
+};
 
-    this._properties.push(
-      new TemplateProperties({
-        name: "TextAlignCSS",
-        func: () => {
-          if (this.TextAlign == Alignment.Inherit) return "";
-          return "text-align: " + this.TextAlign + ";";
-        }
-      } as TemplateProperties)
-    );
+export const DefaultMargin: IContainer = {
+  ...Default,
+  Align: EAlignment.Center,
+  Width: Unit.Percent(90)
+}
 
-    this._properties.push(
-      new TemplateProperties({
-        name: "BackgroundColorFullCSS",
-        func: () => "background-color: " + this.BackgroundColor.toString() + ";"
-      } as TemplateProperties)
-    );
-    this._properties.push(
-      new TemplateProperties({
-        name: "BackgroundColorFullATR",
-        func: () => {
-          return 'bgcolor="' + this.BackgroundColor + '"';
-        }
-      } as TemplateProperties)
-    );
-    this._properties.push(
-      new TemplateProperties({
-        name: "BorderAdvanced",
-        func: () => {
-          return this.Border.getBorderCSS();
-        }
-      } as TemplateProperties)
-    )
-    this._properties.push(new TemplateProperties({
-      name: "LineHeightC",
-      func: () => this.LineHeight.GetUnitCSS("line-height")
-    } as TemplateProperties)
-    )
+export const VerticalSpace: IVerticalSpace = {
+  toString: () => {
+    return "&#160;";
   }
-
-  _rawHTML = '<table  align="{Align}"  border="0"  cellpadding="0"  cellspacing="0"  {BackgroundColorFullATR}  style="{TextAlignCSS} {LineHeightC} {BackgroundColorFullCSS} width: {Width}; box-shadow: {Shadow}; {BorderAdvanced} {BorderRadius}"  {Widthattribute}  {BackgroundColorattribute}>  <tbody>    <tr>      <td>{Content}</td>    </tr>  </tbody></table>';
 }

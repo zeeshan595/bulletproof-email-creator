@@ -1,48 +1,47 @@
-import Template from "./template";
-import Unit from "./unit";
-import BorderRadius from "./borderRadius";
+import ITemplate from "./template";
 
-export default class Image extends Template {
-  AltText: string = "";
-  Source: string = "";
-  Width: Unit = Unit.Auto;
-  Height: Unit = Unit.Auto;
-  BorderRadius: BorderRadius = BorderRadius.None;
-  Loop: null | "infinite";
+export default interface IImage extends ITemplate {
+  toString: (image: IImage) => string;
+  Source: string;
+  AlternateText: string;
+  Width: number | null;
+  Height: number | null;
+}
 
-  constructor(fields?: Image) {
-    super();
-    Object.assign(this, fields);
-  }
-
-  toString(): string {
-    if (this.Width.Type == "%" || this.Height.Type == "%") {
-      throw Error(
-        "img tag does not support percent scaling on some outlook clients!"
-      );
+export const Default: IImage = {
+  toString: (image: IImage): string => {
+    let widthAtr = "";
+    let widthSty = "";
+    if (image.Width) {
+      widthAtr = ' width="' + image.Width + '" ';
+      widthSty = " width: " + image.Width + "; ";
     }
 
-    let loop = "";
-    if (this.Loop == "infinite") {
-      loop = "loop='infinite' ";
+    let heightAtr = "";
+    let heightSty = "";
+    if (image.Height) {
+      heightAtr = ' height="' + image.Height + '" ';
+      heightSty = " height: " + image.Height + "; ";
     }
 
     return (
-      '<img src="' +
-      this.Source +
-      '" alt="' +
-      this.AltText +
+      "<img " +
+      widthAtr +
+      heightAtr +
+      ' alt="' +
+      image.AlternateText +
       '" ' +
-      this.Width.GetUnitAttribute("width") +
-      " " +
-      loop + " " +
-      this.Height.GetUnitAttribute("height") +
-      ' style="' +
-      this.Width.GetUnitCSS("width") +
-      this.Height.GetUnitCSS("height") +
-      this.BorderRadius.toString() + 
-      '"' +
-      " />"
+      ' src="' +
+      image.Source +
+      '" ' +
+      'style="' +
+      widthSty +
+      heightSty +
+      '" />'
     );
-  }
-}
+  },
+  Source: "https://www.scottishpower.co.uk/assets/images/global/logo/sp_logo.jpg",
+  AlternateText: "scottish power",
+  Width: null,
+  Height: null
+};

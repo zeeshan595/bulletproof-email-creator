@@ -1,33 +1,33 @@
-import Unit from "./unit";
-import Color from "./color";
-import BorderType from "./BorderType";
+import EBorderType from "./borderType";
+import IColor, * as Color from "./color";
 
-export default class BorderInfo {
-  Amount: Unit = Unit.Pixels(1);
-  Type: BorderType = BorderType.Solid;
-  Color: Color = Color.Black;
-  IsDisabled: boolean = false;
+export default interface IBorderInfo {
+  Amount: number;
+  Type: EBorderType;
+  Color: IColor;
+  Disabled: boolean;
+};
 
-  constructor(fields?: BorderInfo) {
-    Object.assign(this, fields);
+export const Default: IBorderInfo = {
+  Amount: 1,
+  Type: EBorderType.Solid,
+  Color: Color.Black,
+  Disabled: true
+};
+
+export const toString = (info: IBorderInfo, name: string) => {
+  if (info.Disabled) {
+    return " " + name + ": 0; ";
   }
-
-  toString(): string {
-    if (this.IsDisabled) return "none";
-
-    if (this.Amount.Type == "%") {
-      throw Error("Cannot use percentage scaling on border.");
-    }
-
-    let color: string = this.Color.toString();
-    if (this.Color.Inherit) {
-      color = "";
-    }
-
-    return this.Amount.toString() + " " + this.Type.toString() + " " + color;
-  }
-
-  static None: BorderInfo = new BorderInfo({
-    IsDisabled: true
-  } as BorderInfo);
+  return (
+    " " +
+    name +
+    ": " +
+    info.Amount + 
+    "px " + 
+    info.Type.toString() + 
+    " " + 
+    Color.ColorToHex(info.Color) +
+    "; "
+  );
 }

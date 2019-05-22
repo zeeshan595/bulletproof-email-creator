@@ -1,93 +1,43 @@
-import BorderInfo from "./borderInfo";
+import IBorderInfo, * as BorderInfo from "./borderInfo";
 
-export default class Border {
-  Top: BorderInfo = BorderInfo.None;
-  Bottom: BorderInfo = BorderInfo.None;
-  Left: BorderInfo = BorderInfo.None;
-  Right: BorderInfo = BorderInfo.None;
-  IsDisabled: boolean = false;
+export default interface IBorder {
+  Top: IBorderInfo;
+  Bottom: IBorderInfo;
+  Left: IBorderInfo;
+  Right: IBorderInfo;
+  Disabled: boolean;
+};
 
-  constructor(fields?: Border) {
-    Object.assign(this, fields);
-  }
+export const Default: IBorder = {
+  Top: {
+    ...BorderInfo.Default,
+  },
+  Left: {
+    ...BorderInfo.Default,
+  },
+  Right: {
+    ...BorderInfo.Default,
+  },
+  Bottom: {
+    ...BorderInfo.Default,
+  },
+  Disabled: true
+};
 
-  toString(): string {
-    throw Error("Please use getBorderCSS");
-  }
-
-  getBorderCSS() {
-    if (this.IsDisabled) return "";
-
-    if (this.Top == this.Bottom) {
-      if (this.Left == this.Right) {
-        if (this.Top == this.Left) {
-          return "border: " + this.Top.toString() + "; ";
-        }
-      }
-    }
-
-    return (
-      "border-top: " + 
-      this.Top.toString() +
-      "; " +
-      "border-bottom: " +
-      this.Bottom.toString() +
-      "; " +
-      "border-left: " +
-      this.Left.toString() +
-      "; " +
-      "border-right:" +
-      this.Right.toString() +
-      "; "
-    );
-  }
-
-  static None: Border = new Border({
-    IsDisabled: true
-  } as Border);
-
-  static All = (info: BorderInfo) => {
-    return new Border({
-      Top: new BorderInfo(info),
-      Bottom: new BorderInfo(info),
-      Left: new BorderInfo(info),
-      Right: new BorderInfo(info)
-    } as Border);
-  };
-
-  static Top = (info: BorderInfo) => {
-    return new Border({
-      Top: new BorderInfo(info),
-      Bottom: BorderInfo.None,
-      Left: BorderInfo.None,
-      Right: BorderInfo.None
-    } as Border)
-  };
-
-  static Bottom = (info: BorderInfo) => {
-    return new Border({
-      Bottom: new BorderInfo(info),
-      Top: BorderInfo.None,
-      Left: BorderInfo.None,
-      Right: BorderInfo.None
-    } as Border)
-  };
-
-  static Left = (info: BorderInfo) => {
-    return new Border({
-      Left: new BorderInfo(info),
-      Bottom: BorderInfo.None,
-      Top: BorderInfo.None,
-      Right: BorderInfo.None
-    } as Border)
-  };
-
-  static Right = (info: BorderInfo) => {
-    return new Border({
-      Right: new BorderInfo(info),
-      Bottom: BorderInfo.None,
-      Left: BorderInfo.None,
-      Top: BorderInfo.None
-    } as Border)
-  };
+export const toString = (border: IBorder) => {
+  if (border.Disabled) return "";
+  return (
+    BorderInfo.toString(border.Top, "border-top") +
+    BorderInfo.toString(border.Bottom, "border-bottom") +
+    BorderInfo.toString(border.Left, "border-left") +
+    BorderInfo.toString(border.Right, "border-right")
+  );
 }
+
+export const All = (info: IBorderInfo) => ({
+  Disabled: false,
+  Top: info,
+  Bottom: info,
+  Left: info,
+  Right: info
+}) as IBorder

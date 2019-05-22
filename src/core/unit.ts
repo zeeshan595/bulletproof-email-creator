@@ -1,55 +1,45 @@
-export default class Unit {
-  Value: "inherit" | "auto" | number = "auto";
-  Type: "" | "px" | "%" = "px";
+export default interface IUnit {
+  Type: "px" | "%";
+  Value: "inherit" | "auto" | number;
+};
 
-  constructor(fields?: Unit) {
-    Object.assign(this, fields);
-  }
+export const Default: IUnit = {
+  Type: "px",
+  Value: "inherit"
+};
 
-  toString(): string {
-    if (this.Value == "auto" || this.Value == "inherit") return this.Value;
-    return this.Value + this.Type;
-  }
+export const Percent = (n: number): IUnit => ({
+  Type: "%",
+  Value: n
+}) as IUnit;
 
-  GetUnitAttribute(attribute: string): string {
-    if (this.Value != "auto" && this.Value != "inherit") {
-      if (this.Type == "%") {
-        return attribute + '="' + this.toString() + '"';
-      }
-      return attribute + '="' + this.Value + '"';
-    }
+export const Pixels = (n: number): IUnit => ({
+  Type: "px",
+  Value: n
+});
+
+export const toString = (unit: IUnit, name: string, type: "attribute" | "style"): string => {
+  if (unit.Value == "inherit" || unit.Value == "auto") {
     return "";
   }
 
-  GetUnitCSS(name: string): string {
-    if (this.Value != "auto" && this.Value != "inherit") {
-      return name + ": " + this.Value + this.Type + ";";
+  if (type == "attribute") {
+    switch (unit.Type) {
+      case "px":
+        return " " + name + '="' + unit.Value + '" ';
+      case "%":
+        return " " + name + '="' + unit.Value + '%" ';
+      default:
+        throw Error("Unit type not supported!");
     }
-    return "";
-  }
-
-  static Auto = new Unit({
-    Type: "",
-    Value: "auto"
-  } as Unit);
-  static Inherit = new Unit({
-    Type: "",
-    Value: "inherit"
-  } as Unit);
-  static Zero = new Unit({
-    Type: "px",
-    Value: 0
-  } as Unit);
-  static Pixels(n: number): Unit {
-    return new Unit({
-      Type: "px",
-      Value: n
-    } as Unit);
-  }
-  static Percent(n: number): Unit {
-    return new Unit({
-      Type: "%",
-      Value: n
-    } as Unit);
+  } else {
+    switch (unit.Type) {
+      case "px":
+        return " " + name + ': ' + unit.Value + 'px; ';
+      case "%":
+        return " " + name + ': ' + unit.Value + '%; ';
+      default:
+        throw Error("Unit type not supported!");
+    }
   }
 }

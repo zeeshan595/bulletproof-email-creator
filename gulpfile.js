@@ -1,6 +1,6 @@
 const config = {
   input: "src",
-  output: "build",
+  output: "dist",
   main: "main.js"
 };
 

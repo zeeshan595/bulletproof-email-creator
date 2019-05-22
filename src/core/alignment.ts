@@ -1,4 +1,4 @@
-enum Alignment {
+enum EAlignment {
   //Horizontal
   Inherit = 0,
   Left = "left",
@@ -8,45 +8,17 @@ enum Alignment {
   Top = "top",
   Middle = "middle",
   Bottom = "bottom"
-}
+};
+export default EAlignment;
 
-const errorChecking = (type: "vertical" | "horizontal", data: Alignment) => {
-  if (type == "vertical") {
-    if (
-      data == Alignment.Left ||
-      data == Alignment.Right ||
-      data == Alignment.Center
-    ) {
-      throw Error("Trying to use horizontal alignments for a vertical field");
-    }
-  } else if (type == "horizontal") {
-    if (
-      data == Alignment.Top ||
-      data == Alignment.Bottom ||
-      data == Alignment.Middle
-    ) {
-      throw Error("Trying to use vertical alignments for a horizontal field");
-    }
+export const toString = (align: EAlignment, name: string, type: "attribute" | "style") => {
+  if (align == EAlignment.Inherit) {
+    return "";
   }
-};
 
-export default Alignment;
-export const GetAlignAttribute = (
-  name: string,
-  type: "vertical" | "horizontal",
-  data: Alignment
-) => {
-  if (data == Alignment.Inherit) return "";
-  errorChecking(type, data);
-  return name + '="' + data.toString() + '"';
-};
-
-export const GetAlignCSS = (
-  name: string,
-  type: "vertical" | "horizontal",
-  data: Alignment
-) => {
-  if (data == Alignment.Inherit) return "";
-  errorChecking(type, data);
-  return name + ": " + data.toString() + ";";
-};
+  if (type == "attribute") {
+    return ' ' + name + '="' + align.toString() + '" ';
+  } else if (type == "style") {
+    return " " + name + ": " + align.toString() + "; ";
+  }
+}
