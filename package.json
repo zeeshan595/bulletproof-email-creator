@@ -1,8 +1,9 @@
 {
   "name": "bulletproof-email-creator",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "repository": {
-    "url": "https://github.com/zeeshan595/email-builder"
+    "url": "https://github.com/zeeshan595/email-builder",
+    "npm": "https://www.npmjs.com/package/bulletproof-email-creator"
   },
   "description": "A tool to help create emails that will work on most if not all email clients",
   "scripts": {
@@ -23,5 +24,12 @@
     "gulp-typescript": "^5.0.0",
     "html-minifier": "^3.5.21",
     "typescript": "^3.2.2"
-  }
+  },
+  "keywords": [
+    "bulletproof",
+    "email",
+    "creator",
+    "create",
+    "template"
+  ]
 }
