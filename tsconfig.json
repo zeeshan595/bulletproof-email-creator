@@ -6,6 +6,7 @@
     "noImplicitAny": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceMap": false
+    "sourceMap": false,
+    "declaration": true
   }
 }
