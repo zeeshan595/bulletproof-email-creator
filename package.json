@@ -1,6 +1,6 @@
 {
   "name": "bulletproof-email-creator",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "repository": {
     "url": "https://github.com/zeeshan595/bulletproof-email-creator",
     "npm": "https://www.npmjs.com/package/bulletproof-email-creator"
@@ -15,12 +15,15 @@
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "author": "Zeeshan Abid",
-  "Dependencies": {
+  "devDependencies": {
     "@types/node": "^10.12.18",
     "gulp": "^4.0.0",
     "gulp-typescript": "^5.0.0",
     "html-minifier": "^3.5.21",
     "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security"
   },
   "keywords": [
     "bulletproof",
