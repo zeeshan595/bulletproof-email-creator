@@ -13,6 +13,7 @@ import IRaw, * as Raw from "./core/raw";
 import IGrid, * as Grid from "./core/grid";
 import ICell, * as Cell from "./core/cell";
 import ITemplate, * as Template from "./core/template";
+import IButton, * as Button from "./core/button";
 import IVerticalSpace from "./core/verticalSpace";
 import EBorderType from "./core/borderType";
 
@@ -47,6 +48,8 @@ export {
   IBorderInfo,
   Template,
   ITemplate,
+  Button,
+  IButton,
   EBorderType,
   IVerticalSpace
 };

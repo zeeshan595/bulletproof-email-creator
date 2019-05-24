@@ -12,6 +12,7 @@ export default interface IContainer extends ITemplate {
   Align: EAlignment;
   TextAlign: EAlignment;
   BackgroundColor: IColor;
+  BackgroundImage?: string;
   Width: IUnit;
   LineHeight: IUnit;
   Shadow: IShadow;
@@ -20,10 +21,21 @@ export default interface IContainer extends ITemplate {
   Content: ITemplate[];
 };
 
+const getBackgroundImage = (url: string, type: "attribute" | "style") => {
+  if (!url) return "";
+
+  if (type == "attribute") {
+    return ' background="' + url + '" ';
+  } else if (type == "style") {
+    return " background-image: url('" + url + "');"
+  }
+}
+
 export const attributes = (data: IContainer) => (
   Color.toString(data.BackgroundColor, "bgcolor", "attribute") +
   Unit.toString(data.Width, "width", "attribute") +
-  Alignment.toString(data.Align, "align", "attribute")
+  Alignment.toString(data.Align, "align", "attribute") +
+  getBackgroundImage(data.BackgroundImage, "attribute")
 )
 
 export const styles = (data: IContainer) => (
@@ -32,12 +44,24 @@ export const styles = (data: IContainer) => (
   Alignment.toString(data.TextAlign, "text-align", "style") +
   Unit.toString(data.LineHeight, "line-height", "style") +
   Shadow.toString(data.Shadow) +
-  BorderRadius.toString(data.BorderRadius)
+  BorderRadius.toString(data.BorderRadius) +
+  getBackgroundImage(data.BackgroundImage, "style")
 )
 
 export const Default: IContainer = {
   toString: (data: IContainer): string => {
+    let outlookBackgroundImage = '';
+    if (data.BackgroundImage) {
+      outlookBackgroundImage = '<!--[if gte mso 9]>' +
+        '<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">' +
+        '<v:fill type="tile" src="' + data.BackgroundImage + '" color="' + Color.ColorToHex(data.BackgroundColor) + '"/>' +
+        '</v:background>' +
+        '<![endif]-->';
+    }
+
     let rtn = "";
+    rtn += '<div style="' + Color.toString(data.BackgroundColor, "background-color", "style") + '">';
+    rtn += outlookBackgroundImage;
     rtn += "<table ";
     rtn += attributes(data);
     rtn += 'style="'
@@ -51,6 +75,7 @@ export const Default: IContainer = {
       rtn += "</tr>";
     }
     rtn += "</table>"
+    rtn += "</div>";
     return rtn;
   },
   Align: EAlignment.Inherit,
