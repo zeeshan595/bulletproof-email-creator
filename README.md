@@ -1,6 +1,8 @@
 #Email Builder
 This application can be used to create email templates using typescript and avoids you from having to deal with legacy html code.
 
+Sample Project: https://github.com/zeeshan595/bulletproof-email-creator-sample
+
 **Sample Code**
 ```typescript
 import {

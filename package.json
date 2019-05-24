@@ -1,9 +1,10 @@
 {
   "name": "bulletproof-email-creator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "repository": {
     "url": "https://github.com/zeeshan595/bulletproof-email-creator",
-    "npm": "https://www.npmjs.com/package/bulletproof-email-creator"
+    "npm": "https://www.npmjs.com/package/bulletproof-email-creator",
+    "sample": "https://github.com/zeeshan595/bulletproof-email-creator-sample"
   },
   "description": "A tool to help create emails that will work on most if not all email clients",
   "scripts": {
