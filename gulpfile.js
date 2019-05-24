@@ -6,9 +6,16 @@ const config = {
 
 const gulp = require("gulp");
 const ts = require("gulp-typescript");
-const run = require("gulp-run");
 const babel = require("gulp-babel");
-const tsCompiler = ts.createProject("tsconfig.json");
+
+var tsProject = ts.createProject({
+  declaration: true,
+  target: "es6",
+  noImplicitAny: false,
+  outDir: config.output,
+  rootDir: config.input,
+  declarationFiles: true
+});
 
 //compile typescript
 gulp.task(
@@ -16,17 +23,15 @@ gulp.task(
   gulp.series(() => {
     return gulp
       .src(config.input + "/**/*.ts")
-      .pipe(tsCompiler())
+      .pipe(tsProject())
+      .pipe(gulp.dest(config.output));
+  }, () => {
+    return gulp.src(config.output + "/**/*.js")
+      .pipe(babel({
+        presets: [
+          "@babel/preset-env"
+        ]
+      }))
       .pipe(gulp.dest(config.output));
   })
 );
-
-gulp.task("default", gulp.series(() => {
-  return gulp
-    .src(config.input + "/**/*.ts")
-    .pipe(tsCompiler())
-    .pipe(babel())
-    .pipe(gulp.dest(config.output));
-}, () => {
-  return run("node " + config.output + "/" + config.main).exec();
-}));
