@@ -39,7 +39,7 @@ export const saveDocument = (doc: IDocument, file: string) => {
     /\<tr\>[\s]*\<td\>[\s]*\<\/td\>[\s]*\<\/tr\>/g,
     ""
   );
-  fs.writeFileSync("build/" + file, processedDocument, "utf-8");
+  fs.writeFileSync(file, processedDocument, "utf-8");
 }
 
 export const VerticalSpace: IVerticalSpace = {

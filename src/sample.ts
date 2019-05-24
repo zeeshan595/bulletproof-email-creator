@@ -17,6 +17,9 @@ import {
 
 //Create a container
 const container = {
+  //You MUST import the default settnigs
+  //for this to work properly
+  ...Container.Default, //IMPORTANT
   //Container Properties
   Align: EAlignment.Center,
   Width: Unit.Pixels(600),
@@ -40,7 +43,8 @@ const container = {
     {
       ...Image.Default,
       Source: "my_cool_image.gif"
-    } as IImage
+    } as IImage,
+    //Bulletproof Button
   ] as ITemplate[]
 } as IContainer
 
