@@ -60,7 +60,7 @@ export const Default: IContainer = {
     }
 
     let rtn = "";
-    rtn += '<div style="' + Color.toString(data.BackgroundColor, "background-color", "style") + '">';
+    rtn += '<div>';
     rtn += outlookBackgroundImage;
     rtn += "<table ";
     rtn += attributes(data);

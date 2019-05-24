@@ -60,7 +60,21 @@ const container = {
         //Bulletproof Button
         {
           ...Button.Default//IMPORTANT
-        } as IButton
+          //My Properties for button
+        } as IButton,
+        {
+          ...Container.Default,
+          BackgroundImage: "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          Width: Unit.Pixels(400),
+          Content: [
+            Container.VerticalSpace,
+            Container.VerticalSpace,
+            Container.VerticalSpace,
+            Container.VerticalSpace,
+            Container.VerticalSpace,
+            Container.VerticalSpace
+          ]
+        } as IContainer
       ] as ITemplate[]
     } as IContainer,
     Container.VerticalSpace

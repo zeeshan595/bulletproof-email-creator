@@ -23,7 +23,7 @@ export const Default: IGrid = {
       console.warn("Please use Cell instead of content for grid");
     }
     let rtn = "";
-    rtn += '<div style="' + Color.toString(data.BackgroundColor, "background-color", "style") + '">';
+    rtn += '<div>';
     rtn += outlookBackgroundImage;
     rtn += "<table ";
     rtn += Container.attributes(data);
