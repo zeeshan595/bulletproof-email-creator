@@ -14,8 +14,11 @@ import IGrid, * as Grid from "./core/grid";
 import ICell, * as Cell from "./core/cell";
 import ITemplate, * as Template from "./core/template";
 import IButton, * as Button from "./core/button";
+import * as ListImport from "./core/List";
 import IVerticalSpace from "./core/verticalSpace";
 import EBorderType from "./core/borderType";
+
+const List = ListImport.Create;
 
 export {
   Document,
@@ -50,6 +53,7 @@ export {
   ITemplate,
   Button,
   IButton,
+  List,
   EBorderType,
   IVerticalSpace
 };

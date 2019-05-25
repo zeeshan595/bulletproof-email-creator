@@ -15,7 +15,8 @@ import {
   Container,
   IButton,
   Button,
-  BorderRadius
+  BorderRadius,
+  List
 } from "./main";
 
 //Create a container
@@ -74,7 +75,22 @@ const container = {
             Container.VerticalSpace,
             Container.VerticalSpace
           ]
-        } as IContainer
+        } as IContainer,
+        //List example
+        List([
+          {
+            ...Raw.Default, //IMPORTANT
+            Content: (
+              Text.p("Hello World")
+            )
+          } as IRaw,
+          {
+            ...Raw.Default, //IMPORTANT
+            Content: (
+              Text.p("Bye World")
+            )
+          } as IRaw
+        ], "numbers", null, 5)
       ] as ITemplate[]
     } as IContainer,
     Container.VerticalSpace
@@ -85,6 +101,7 @@ const container = {
 const document = {
   ...Document.Default,//IMPORTANT
   BackgroundColor: Color.rgb(240, 240, 240),
+  Title: "My Awesome Email",
   Content: [
     //Document specific vertical space
     Document.VerticalSpace,
