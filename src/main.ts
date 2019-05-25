@@ -3,7 +3,7 @@ import IContainer, * as Container from "./core/container";
 import IShadow, * as Shadow from "./core/shadow";
 import IBorder, * as Border from "./core/border";
 import IBorderInfo, * as BorderInfo from "./core/borderInfo";
-import IBorderRadius, * as BorderRadius from "./core/BorderRadius";
+import IBorderRadius, * as BorderRadius from "./core/borderRadius";
 import IUnit, * as Unit from "./core/unit";
 import IColor, * as Color from "./core/color";
 import EAlignment, * as Alignment from "./core/alignment";
