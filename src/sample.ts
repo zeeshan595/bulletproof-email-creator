@@ -47,7 +47,9 @@ const container = {
             Text.p(
               "some amazing text " +
               Text.a("super awesome link", { Hyperlink: "https://google.co.uk" })
-            )
+            ) + 
+            Text.Space + // Add a vertical space
+            Text.p(" Some more text ")
           )
         } as IRaw,
         //Container specific vertical space
