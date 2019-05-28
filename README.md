@@ -1,6 +1,8 @@
 #Email Builder
 This application can be used to create email templates using typescript and avoids you from having to deal with legacy html code.
 
+Github: https://github.com/zeeshan595/bulletproof-email-creator
+NPM: https://www.npmjs.com/package/bulletproof-email-creator
 Sample Project: https://github.com/zeeshan595/bulletproof-email-creator-sample
 
 On older clients (Outlook) shadows & border radius may not work for containers/grids. However buttons should have rounded corners.
